@@ -1369,19 +1369,7 @@ function pkcs1pad2(s,n) {
   var ba = new Array();
   var i = s.length - 1;
   while(i >= 0 && n > 0) {
-    var c = s.charCodeAt(i--);
-    if(c < 128) { // encode using utf-8
-      ba[--n] = c;
-    }
-    else if((c > 127) && (c < 2048)) {
-      ba[--n] = (c & 63) | 128;
-      ba[--n] = (c >> 6) | 192;
-    }
-    else {
-      ba[--n] = (c & 63) | 128;
-      ba[--n] = ((c >> 6) & 63) | 128;
-      ba[--n] = (c >> 12) | 224;
-    }
+    ba[--n] = s.charCodeAt(i--);
   }
   ba[--n] = 0;
   var rng = new SecureRandom();
